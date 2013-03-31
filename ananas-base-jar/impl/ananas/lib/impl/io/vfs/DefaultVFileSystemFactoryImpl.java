@@ -8,7 +8,12 @@ public class DefaultVFileSystemFactoryImpl implements VFileSystemFactory {
 
 	@Override
 	public VFileSystem createFileSystem(VFileSystemConfiguration config) {
-		return  new  VFileSystemImpl ( this,  config  ) ;
+		return new VFileSystemImpl(this, config);
+	}
+
+	@Override
+	public VFileSystem defaultFileSystem() {
+		return this.createFileSystem(null);
 	}
 
 }
