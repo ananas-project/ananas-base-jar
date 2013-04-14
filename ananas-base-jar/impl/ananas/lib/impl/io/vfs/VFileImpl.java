@@ -67,4 +67,9 @@ public class VFileImpl implements VFile {
 		return this.mFile.toString();
 	}
 
+	@Override
+	public boolean mkdir() {
+		return this.mFile.mkdir();
+	}
+
 }
