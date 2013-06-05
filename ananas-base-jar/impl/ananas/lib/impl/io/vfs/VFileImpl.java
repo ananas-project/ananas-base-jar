@@ -3,6 +3,8 @@ package ananas.lib.impl.io.vfs;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import ananas.lib.io.vfs.VFile;
 import ananas.lib.io.vfs.VFileSystem;
@@ -45,6 +47,9 @@ public class VFileImpl implements VFile {
 	@Override
 	public VFile getParentFile() {
 		File pf = this.mFile.getParentFile();
+		if (pf == null) {
+			return null;
+		}
 		return new VFileImpl(this.mVFS, pf);
 	}
 
@@ -72,4 +77,14 @@ public class VFileImpl implements VFile {
 		return this.mFile.mkdir();
 	}
 
+	@Override
+	public List<VFile> listFiles() {
+		File[] files = this.mFile.listFiles();
+		List<VFile> vlist = new ArrayList<VFile>(files.length);
+		for (File file : files) {
+			VFile vf = new VFileImpl(this.mVFS, file);
+			vlist.add(vf);
+		}
+		return vlist;
+	}
 }
