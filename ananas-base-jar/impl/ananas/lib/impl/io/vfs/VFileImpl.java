@@ -87,4 +87,9 @@ public class VFileImpl implements VFile {
 		}
 		return vlist;
 	}
+
+	@Override
+	public String getAbsolutePath() {
+		return this.mFile.getAbsolutePath();
+	}
 }
