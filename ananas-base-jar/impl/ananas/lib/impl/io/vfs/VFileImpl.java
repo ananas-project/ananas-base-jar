@@ -80,6 +80,9 @@ public class VFileImpl implements VFile {
 	@Override
 	public List<VFile> listFiles() {
 		File[] files = this.mFile.listFiles();
+		if (files == null) {
+			return null;
+		}
 		List<VFile> vlist = new ArrayList<VFile>(files.length);
 		for (File file : files) {
 			VFile vf = new VFileImpl(this.mVFS, file);
