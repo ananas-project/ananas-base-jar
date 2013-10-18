@@ -95,4 +95,19 @@ public class VFileImpl implements VFile {
 	public String getAbsolutePath() {
 		return this.mFile.getAbsolutePath();
 	}
+
+	private File __cast(VFile file) {
+		if (file instanceof VFileImpl) {
+			VFileImpl impl = (VFileImpl) file;
+			return impl.mFile;
+		} else {
+			return new File(file.getURI());
+		}
+	}
+
+	@Override
+	public boolean renameTo(VFile dest) {
+		File to = __cast(dest);
+		return this.mFile.renameTo(to);
+	}
 }
