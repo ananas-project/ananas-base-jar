@@ -110,4 +110,9 @@ public class VFileImpl implements VFile {
 		File to = __cast(dest);
 		return this.mFile.renameTo(to);
 	}
+
+	@Override
+	public boolean delete() {
+		return mFile.delete();
+	}
 }

@@ -58,4 +58,9 @@ public class VFileSystemImpl implements VFileSystem {
 		return File.pathSeparator;
 	}
 
+	@Override
+	public String separator() {
+		return File.separator;
+	}
+
 }
