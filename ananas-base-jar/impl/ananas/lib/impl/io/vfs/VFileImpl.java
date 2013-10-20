@@ -115,4 +115,14 @@ public class VFileImpl implements VFile {
 	public boolean delete() {
 		return mFile.delete();
 	}
+
+	@Override
+	public long lastModified() {
+		return mFile.lastModified();
+	}
+
+	@Override
+	public long length() {
+		return mFile.length();
+	}
 }
