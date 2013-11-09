@@ -7,6 +7,8 @@ import ananas.lib.io.vfs.VFile;
 import ananas.lib.io.vfs.VFileSystem;
 import ananas.lib.io.vfs.VFileSystemConfiguration;
 import ananas.lib.io.vfs.VFileSystemFactory;
+import ananas.lib.io.vfs.VPathAbsolute;
+import ananas.lib.io.vfs.VPathRelative;
 
 public class VFileSystemImpl implements VFileSystem {
 
@@ -61,6 +63,26 @@ public class VFileSystemImpl implements VFileSystem {
 	@Override
 	public String separator() {
 		return File.separator;
+	}
+
+	@Override
+	public VPathAbsolute newAbsolutePath(String string) {
+		return VPathImpl.newAbsolutePath(this, string);
+	}
+
+	@Override
+	public VPathRelative newRelativePath(String string) {
+		return VPathImpl.newRelativePath(this, string);
+	}
+
+	@Override
+	public char pathSeparatorChar() {
+		return File.pathSeparatorChar;
+	}
+
+	@Override
+	public char separatorChar() {
+		return File.separatorChar;
 	}
 
 }
