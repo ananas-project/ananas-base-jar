@@ -1,6 +1,7 @@
 package ananas.lib.impl.io.vfs;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 
 import ananas.lib.io.vfs.VFile;
@@ -33,7 +34,9 @@ public class VFileSystemImpl implements VFileSystem {
 
 	@Override
 	public VFile newFile(VFile dir, String string) {
-		File file = new File(new File(dir.getURI()), string);
+		VFileImpl dir1 = VFileImpl.getInst(this, dir);
+		File dir2 = dir1.toFile();
+		File file = new File(dir2, string);
 		return new VFileImpl(this, file);
 	}
 
@@ -83,6 +86,27 @@ public class VFileSystemImpl implements VFileSystem {
 	@Override
 	public char separatorChar() {
 		return File.separatorChar;
+	}
+
+	@Override
+	public VFile createTempFile(String prefix, String suffix)
+			throws IOException {
+		File file = File.createTempFile(prefix, suffix);
+		return new VFileImpl(this, file);
+	}
+
+	@Override
+	public VFile createTempFile(String prefix, String suffix, VFile directory)
+			throws IOException {
+		VFileImpl dir2 = VFileImpl.getInst(this, directory);
+		File file = File.createTempFile(prefix, suffix, dir2.toFile());
+		return new VFileImpl(this, file);
+	}
+
+	@Override
+	public VFile[] listRoots() {
+		File[] array = File.listRoots();
+		return VFileImpl.arrayFrom(this, array);
 	}
 
 }

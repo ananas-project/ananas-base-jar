@@ -56,6 +56,25 @@ class VPathImpl {
 		VPathAbsoluteImpl(VFileSystem vfs, String str) {
 			super(vfs, str);
 		}
+
+		@Override
+		public boolean isSubOf(VPathAbsolute base) {
+			String f = this.toString();
+			String b = base.toString();
+			return (f.startsWith(b));
+		}
+
+		@Override
+		public VPathRelative getOffset(VPathAbsolute base) {
+			String f = this.toString();
+			String b = base.toString();
+			if (!f.startsWith(b)) {
+				return null;
+			}
+			String string = f.substring(b.length());
+			return VPathImpl.newRelativePath(base.getVFS(), string);
+		}
+
 	}
 
 	static void __add_component(List<String> list, String string) {
